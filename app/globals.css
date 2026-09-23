@@ -1,0 +1,532 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Deaktiver transitions under initial innlasting for å unngå hvit flicker */
+.disable-transitions,
+.disable-transitions *,
+.disable-transitions *::before,
+.disable-transitions *::after {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+  
+}
+
+
+/* --- MODERNE LOOK FOR FULLCALENDAR (LIGHT & DARK MODE) --- */
+
+/* 1. Header og Tittel */
+.fc .fc-toolbar {
+  margin-bottom: 1.5rem !important;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em;
+  color: var(--foreground) !important; /* Mørk i light mode, hvit i dark mode */
+}
+
+/* 2. Knapper uten border */
+.fc .fc-button {
+  background: var(--muted) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--foreground) !important;
+  border-radius: var(--radius) !important;
+  padding: 0.4rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+  transition: all 150ms ease;
+  text-transform: capitalize;
+}
+
+.fc .fc-button:hover {
+  background: var(--accent) !important;
+  color: var(--foreground) !important;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background: var(--accent) !important;
+  color: var(--foreground) !important;
+  box-shadow: none !important;
+}
+
+.fc .fc-button:focus,
+.fc .fc-button:focus-visible {
+  box-shadow: none !important;
+}
+
+/* 3. Dag-kolonner & Kolonnetitler (Man, Tir, Ons...) */
+.fc .fc-col-header-cell {
+  padding: 0.75rem 0 !important;
+  background-color: transparent !important;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: var(--foreground) !important;
+  text-decoration: none !important;
+}
+
+.dark .fc .fc-col-header-cell-cushion {
+  color: #ffffff !important;
+}
+
+/* 4. Dagsnumre og skillelinjer mellom dagene */
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: #8c9096 !important;
+}
+
+/* Ytterramme med ren og myk avrunding */
+.fc-theme-standard .fc-scrollgrid {
+  border: 1px solid #8c9096 !important;
+  border-radius: 0.75rem !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Fjern doble rammer ytterst til høyre og i bunnen */
+.fc-theme-standard .fc-scrollgrid th:last-child,
+.fc-theme-standard .fc-scrollgrid td:last-child {
+  border-right: none !important;
+}
+
+/* Fjerner den indre bunnstreken så kun ytterrammen gjelder */
+.fc .fc-scrollgrid-section-body > td,
+.fc .fc-scrollgrid-section:last-child > td,
+.fc-theme-standard .fc-scrollgrid-sync-table tr:last-child td,
+.fc-theme-standard .fc-daygrid-body tr:last-child td {
+  border-bottom: none !important;
+}
+
+
+/* Avrund de 4 faktiske hjørnene så overskrift og bunn følger buen */
+.fc .fc-col-header th:first-child {
+  border-top-left-radius: 0.75rem !important;
+}
+.fc .fc-col-header th:last-child {
+  border-top-right-radius: 0.75rem !important;
+}
+.fc-theme-standard .fc-scrollgrid-sync-table tr:last-child td:first-child {
+  border-bottom-left-radius: 0.75rem !important;
+}
+.fc-theme-standard .fc-scrollgrid-sync-table tr:last-child td:last-child {
+  border-bottom-right-radius: 0.75rem !important;
+}
+
+/* Beholder opprinnelig border i dark mode */
+.dark .fc-theme-standard td,
+.dark .fc-theme-standard th,
+.dark .fc-theme-standard .fc-scrollgrid {
+  border-color: var(--border) !important;
+}
+
+
+
+.fc .fc-daygrid-day-number {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem !important;
+  text-decoration: none !important;
+  color: var(--foreground) !important;
+}
+
+.dark .fc .fc-daygrid-day-number {
+  color: #ffffff !important;
+}
+
+/* Dagens dato markering */
+.fc .fc-day-today {
+  background-color: rgba(59, 130, 246, 0.08) !important; /* Subtil blå-tone i light mode */
+}
+
+.dark .fc-day-today {
+  background-color: rgba(255, 255, 255, 0.05) !important; /* 100% uendret i dark mode */
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  font-weight: 700;
+  color: var(--foreground) !important;
+}
+
+.dark .fc .fc-day-today .fc-daygrid-day-number {
+  color: #ffffff !important;
+}
+
+/* 5. Events / Hendelser (Fargede pills med hvit tekst - fungerer supert i begge temaer) */
+.fc-direction-ltr .fc-daygrid-event {
+  margin: 2px 4px !important;
+}
+
+.fc .fc-daygrid-event {
+  border-radius: calc(var(--radius) * 0.7) !important;
+  padding: 3px 8px !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.15);
+  transition: all 120ms ease;
+}
+
+.fc .fc-daygrid-event * {
+  color: #ffffff !important;
+}
+
+.fc .fc-daygrid-event:hover {
+  background-color: #2563eb !important;
+  transform: translateY(-1px);
+}
+
+.fc .fc-daygrid-event-dot {
+  display: none;
+}
+
+/* Fikser bakgrunn i header/topp */
+.fc .fc-scrollgrid-section-header,
+.fc .fc-scrollgrid-section-header > th,
+.fc .fc-col-header,
+.fc .fc-col-header-cell {
+  background-color: var(--muted) !important;
+  background: var(--muted) !important;
+}
+
+/* Sørger for at selve kalender-canvaset ikke lekker bakgrunnsfarge */
+.fc .fc-view-harness,
+.fc .fc-scrollgrid {
+  background-color: transparent !important;
+}
+
+/* Egendefinert Tippy Kort-tema */
+.tippy-box[data-theme~='custom-card'] {
+  z-index: 99999 !important;
+  background-color: #333333 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  font-size: 0.85rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.tippy-box[data-theme~='custom-card'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #333333 !important;
+}
+.tippy-box[data-theme~='custom-card'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #333333 !important;
+}
+.tippy-box[data-theme~='custom-card'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #333333 !important;
+}
+.tippy-box[data-theme~='custom-card'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #333333 !important;
+}
+
+.tippy-box[data-theme~='custom-card'] .tippy-content {
+  padding: 0 !important;
+}
+
+/* Fargepalett for events (Hvit tekst beholdes siden bakgrunnene er mettede farger) */
+.fc .event-slate {
+  background-color: #ebb625 !important;
+}
+.fc .event-slate:hover {
+  background-color: #b6a222 !important;
+}
+
+.fc .event-blue {
+  background-color: #2563eb !important;
+}
+.fc .event-blue:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.fc .event-emerald {
+  background-color: #059669 !important;
+}
+.fc .event-emerald:hover {
+  background-color: #047857 !important;
+}
+
+.fc .event-purple {
+  background-color: #7c3aed !important;
+}
+.fc .event-purple:hover {
+  background-color: #6d28d9 !important;
+}
+
+.fc .event-amber {
+  background-color: #c2410c !important;
+}
+.fc .event-amber:hover {
+  background-color: #9a3412 !important;
+}
+
+.fc .event-rose {
+  background-color: #be123c !important;
+}
+.fc .event-rose:hover {
+  background-color: #9f1239 !important;
+}
+
+.fc .event-indigo {
+  background-color: #4f46e5 !important;
+}
+.fc .event-indigo:hover {
+  background-color: #4338ca !important;
+}
+
+.fc .event-teal {
+  background-color: #0d9488 !important;
+}
+.fc .event-teal:hover {
+  background-color: #0f766e !important;
+}
+
+/* --- MOBILOPTIMALISERING & TEKSTHÅNDTERING --- */
+
+.fc .fc-daygrid-event {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+}
+
+.fc .fc-event-main,
+.fc .fc-event-title {
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+}
+
+@media (max-width: 640px) {
+  .fc .fc-toolbar {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .fc .fc-toolbar-chunk:first-child {
+    display: flex !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    text-align: left !important;
+    line-height: 1.2 !important;
+  }
+
+  .fc .fc-toolbar-chunk:nth-child(2):empty {
+    display: none !important;
+  }
+
+  .fc .fc-toolbar-chunk:last-child {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 3px !important;
+    flex: 0 0 auto !important;
+  }
+
+  .fc .fc-button {
+    padding: 0.25rem 0.45rem !important;
+    font-size: 0.75rem !important;
+    height: 28px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .fc .fc-button .fc-icon {
+    font-size: 0.9rem !important;
+  }
+
+  .fc .fc-col-header-cell {
+    padding: 0.4rem 0 !important;
+    font-size: 0.7rem !important;
+  }
+
+  .fc .fc-daygrid-day-number {
+    font-size: 0.75rem !important;
+    padding: 0.25rem !important;
+  }
+
+  .fc .fc-daygrid-event {
+    padding: 2px 4px !important;
+    font-size: 0.65rem !important;
+    margin: 1px 2px !important;
+  }
+
+  .fc .fc-more-popover {
+    background-color: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    max-width: 90vw !important;
+  }
+
+  .dark .fc .fc-more-popover {
+    background-color: #1e1e2e !important;
+  }
+}
+
+/* 1. Skjul bunnlinjen i vanlig nettleser */
+.bottom-nav {
+  display: none;
+}
+
+/* 2. Vis bunnlinjen KUN når den er installert som app OG på mobilskjerm */
+@media all and (display-mode: standalone) and (max-width: 767px) {
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Legg til bunnmarg kun på mobil slik at innhold ikke dekkes */
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+}
+
+
